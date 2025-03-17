@@ -106,7 +106,7 @@
     "@types/node": "^11.15.27",
     "axios": "^0.26.1",
     "bottleneck": "^2.19.5",
-    "codelyzer": "~5.0.0",
+    "codelyzer": "~5.2.2",
     "del": "^4.1.0",
     "execa": "^1.0.0",
     "filenamify": "^4.1.0",
