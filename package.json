@@ -68,7 +68,6 @@
     "ngx-scrollbar": "^4.2.0",
     "normalize.scss": "^0.1.0",
     "package.json": "^2.0.1",
-    "parse-url": "^9.2.0",
     "parser": "^0.1.4",
     "path": "^0.12.7",
     "plugin-error": "^1.0.1",
