@@ -85,7 +85,7 @@
     "xml": "^1.0.1",
     "xml2js": "^0.4.23",
     "xmlhttprequest-ssl": "^2.0.0",
-    "zone.js": "^0.15.0"
+    "zone.js": "^0.14.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^16.2.16",
