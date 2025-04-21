@@ -6,6 +6,9 @@
   ],
   "rules": {
     "angular-whitespace": false,
+    "deprecation": {
+      "severity": "warning"
+    },
     "jsdoc-format": false,
     "max-line-length": [
       true,
