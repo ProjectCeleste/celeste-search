@@ -27,7 +27,7 @@ describe("AppComponent", () => {
         HttpClientModule,
         NgScrollbarModule,
         ReactiveFormsModule,
-        RouterModule.forRoot([], { relativeLinkResolution: 'legacy' }),
+        RouterModule.forRoot([], {}),
         ClickOutsideModule,
       ],
       declarations: [

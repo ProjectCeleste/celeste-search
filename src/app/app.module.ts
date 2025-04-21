@@ -57,7 +57,7 @@ import { UpdateComponent } from "./update/update.component"
     HttpClientModule,
     NgScrollbarModule,
     ReactiveFormsModule,
-    RouterModule.forRoot([], { relativeLinkResolution: 'legacy' }),
+    RouterModule.forRoot([], {}),
     ClickOutsideModule,
     ServiceWorkerModule.register("ngsw-worker.js", { enabled: environment.production }),
   ],
