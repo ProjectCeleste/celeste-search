@@ -1,4 +1,4 @@
-import { HttpClientModule } from "@angular/common/http"
+import { provideHttpClient, withInterceptorsFromDi } from "@angular/common/http"
 import { TestBed, waitForAsync } from "@angular/core/testing"
 import { ReactiveFormsModule } from "@angular/forms"
 import { BrowserModule } from "@angular/platform-browser"
@@ -22,15 +22,7 @@ import { TabsComponent } from "./tabs/tabs.component"
 describe("AppComponent", () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [
-        BrowserModule,
-        HttpClientModule,
-        NgScrollbarModule,
-        ReactiveFormsModule,
-        RouterModule.forRoot([], {}),
-        ClickOutsideModule,
-      ],
-      declarations: [
+    declarations: [
         AdvisorComponent,
         AppComponent,
         AwaitFontDirective,
@@ -43,8 +35,14 @@ describe("AppComponent", () => {
         ResultsComponent,
         SearchComponent,
         TabsComponent,
-      ],
-    }).compileComponents()
+    ],
+    imports: [BrowserModule,
+        NgScrollbarModule,
+        ReactiveFormsModule,
+        RouterModule.forRoot([], {}),
+        ClickOutsideModule],
+    providers: [provideHttpClient(withInterceptorsFromDi())]
+}).compileComponents()
   }))
 
   it("should create the app", () => {

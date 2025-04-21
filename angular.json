@@ -5,7 +5,7 @@
     "celeste-search": {
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "configurations": {
             "production": {
               "budgets": [
@@ -19,7 +19,6 @@
                   "maximumWarning": "6kb"
                 }
               ],
-              "buildOptimizer": true,
               "extractLicenses": true,
               "fileReplacements": [
                 {
@@ -31,7 +30,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "vendorChunk": false,
               "serviceWorker": true
             }
           },
@@ -45,9 +43,12 @@
               "src/sitemap.xml"
             ],
             "index": "src/index.html",
-            "main": "src/main.ts",
-            "outputPath": "dist/celeste-search",
-            "polyfills": "src/polyfills.ts",
+            "outputPath": {
+              "base": "dist/celeste-search"
+            },
+            "polyfills": [
+              "src/polyfills.ts"
+            ],
             "scripts": [],
             "stylePreprocessorOptions": {
               "includePaths": [
@@ -59,12 +60,11 @@
               "src/styles/styles.scss"
             ],
             "tsConfig": "src/tsconfig.app.json",
-            "vendorChunk": true,
             "extractLicenses": false,
-            "buildOptimizer": false,
             "sourceMap": true,
             "optimization": false,
-            "namedChunks": true
+            "namedChunks": true,
+            "browser": "src/main.ts"
           },
           "defaultConfiguration": ""
         },
