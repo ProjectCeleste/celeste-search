@@ -15,6 +15,10 @@
                   "maximumError": "5mb",
                   "maximumWarning": "2mb",
                   "type": "initial"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
                 }
               ],
               "buildOptimizer": true,
@@ -35,6 +39,7 @@
             }
           },
           "options": {
+            "aot": true,
             "assets": [
               "src/assets",
               "src/favicon.ico",
@@ -119,7 +124,7 @@
       "root": "",
       "schematics": {
         "@schematics/angular:component": {
-          "styleext": "scss"
+          "style": "scss"
         }
       },
       "sourceRoot": "src"
