@@ -105,5 +105,11 @@ export const quests = {
             Quest: "Four Bad Apples",
             Quest_Giver: "Tarsos Trader",
             Quest_Starter: "Three Bad Apples (Tarsos)"
+          },
+  armorclth_l005: {
+            Region: "Pataliputra",
+            Quest: "Blessing of the Lion",
+            Quest_Giver: "Chandragupta Maurya",
+            Quest_Starter: "Battle for Kalinga Campaign"
           }
 }
