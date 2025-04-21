@@ -3,7 +3,8 @@ import { Pipe, PipeTransform } from "@angular/core"
 import { Vendor } from "../interfaces"
 
 @Pipe({
-  name: "currency",
+    name: "currency",
+    standalone: false
 })
 export class CurrencyPipe implements PipeTransform {
 

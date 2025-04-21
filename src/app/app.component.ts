@@ -10,9 +10,10 @@ const bodyNegativeMargin = "1rem"
 const columnWidth = "30rem"
 
 @Component({
-  selector: "cis-root",
-  templateUrl: "./app.component.html",
-  styleUrls: ["./app.component.scss"],
+    selector: "cis-root",
+    templateUrl: "./app.component.html",
+    styleUrls: ["./app.component.scss"],
+    standalone: false
 })
 export class AppComponent {
 

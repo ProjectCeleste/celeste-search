@@ -12,16 +12,17 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms"
 import { noop } from "lodash"
 
 @Component({
-  selector: "cis-input-range",
-  templateUrl: "./range.component.html",
-  styleUrls: ["./range.component.scss"],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => InputRangeComponent),
-      multi: true,
-    },
-  ],
+    selector: "cis-input-range",
+    templateUrl: "./range.component.html",
+    styleUrls: ["./range.component.scss"],
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => InputRangeComponent),
+            multi: true,
+        },
+    ],
+    standalone: false
 })
 export class InputRangeComponent implements ControlValueAccessor, OnChanges {
 

@@ -8,10 +8,11 @@ import {
 import { NgScrollbar } from "ngx-scrollbar"
 
 @Component({
-  selector: "cis-scrollbar",
-  templateUrl: "./scrollbar.component.html",
-  styleUrls: ["./scrollbar.component.scss"],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: "cis-scrollbar",
+    templateUrl: "./scrollbar.component.html",
+    styleUrls: ["./scrollbar.component.scss"],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class ScrollbarComponent {
 

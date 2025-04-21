@@ -11,11 +11,12 @@ const order = ["idle", "available", "activating"] // as const
 type SwState = typeof order[number]
 
 @Component({
-  selector: "cis-update",
-  templateUrl: "./update.component.html",
-  styleUrls: ["./update.component.scss"],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [enterLeft],
+    selector: "cis-update",
+    templateUrl: "./update.component.html",
+    styleUrls: ["./update.component.scss"],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    animations: [enterLeft],
+    standalone: false
 })
 export class UpdateComponent {
 

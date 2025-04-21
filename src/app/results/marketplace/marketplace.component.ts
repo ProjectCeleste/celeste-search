@@ -11,10 +11,11 @@ import { MarketplaceQuery } from "../../interfaces"
 import { MarketplaceService, OfferingGroup } from "../../services"
 
 @Component({
-  selector: "cis-marketplace",
-  templateUrl: "./marketplace.component.html",
-  styleUrls: ["./marketplace.component.scss"],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: "cis-marketplace",
+    templateUrl: "./marketplace.component.html",
+    styleUrls: ["./marketplace.component.scss"],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class MarketplaceComponent implements OnChanges {
 

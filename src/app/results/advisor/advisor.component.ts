@@ -9,10 +9,11 @@ import {
 import { Advisor, AdvisorRarity } from "../../interfaces"
 
 @Component({
-  selector: "cis-advisor",
-  templateUrl: "./advisor.component.html",
-  styleUrls: ["./advisor.component.scss"],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: "cis-advisor",
+    templateUrl: "./advisor.component.html",
+    styleUrls: ["./advisor.component.scss"],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class AdvisorComponent implements OnInit {
 

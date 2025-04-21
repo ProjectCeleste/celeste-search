@@ -7,11 +7,12 @@ import {
 import { enterLeaveRight } from "../animations"
 
 @Component({
-  selector: "cis-sidebar",
-  templateUrl: "./sidebar.component.html",
-  styleUrls: ["./sidebar.component.scss"],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [enterLeaveRight],
+    selector: "cis-sidebar",
+    templateUrl: "./sidebar.component.html",
+    styleUrls: ["./sidebar.component.scss"],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    animations: [enterLeaveRight],
+    standalone: false
 })
 export class SidebarComponent {
 

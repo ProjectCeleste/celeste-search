@@ -23,11 +23,12 @@ const rem = 15
 const empty = []
 
 @Component({
-  selector: "cis-results",
-  templateUrl: "./results.component.html",
-  styleUrls: ["./results.component.scss", "./results.shared.scss"],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [fadeIn],
+    selector: "cis-results",
+    templateUrl: "./results.component.html",
+    styleUrls: ["./results.component.scss", "./results.shared.scss"],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    animations: [fadeIn],
+    standalone: false
 })
 export class ResultsComponent implements OnInit, OnDestroy {
 

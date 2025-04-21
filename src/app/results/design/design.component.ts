@@ -6,10 +6,11 @@ import { Design } from "../../interfaces"
 import { DbService } from "../../services"
 
 @Component({
-  selector: "cis-design",
-  templateUrl: "./design.component.html",
-  styleUrls: ["./design.component.scss"],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: "cis-design",
+    templateUrl: "./design.component.html",
+    styleUrls: ["./design.component.scss"],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class DesignComponent {
 

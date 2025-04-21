@@ -4,8 +4,9 @@ import { ItemEffect } from "../interfaces"
 import { SettingsService } from "../services/settings.service"
 
 @Pipe({
-  name: "effectValue",
-  pure: false,
+    name: "effectValue",
+    pure: false,
+    standalone: false
 })
 export class EffectValuePipe implements PipeTransform {
 

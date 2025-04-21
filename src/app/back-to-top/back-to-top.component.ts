@@ -10,10 +10,11 @@ import { Observable } from "rxjs"
 import { map } from "rxjs/operators"
 
 @Component({
-  selector: "cis-back-to-top",
-  templateUrl: "./back-to-top.component.html",
-  styleUrls: ["./back-to-top.component.scss"],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: "cis-back-to-top",
+    templateUrl: "./back-to-top.component.html",
+    styleUrls: ["./back-to-top.component.scss"],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class BackToTopComponent implements OnInit {
 

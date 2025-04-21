@@ -9,10 +9,11 @@ import {
 import { IconComponent } from "../icon/icon.component"
 
 @Component({
-  selector: "cis-icon-button",
-  templateUrl: "./icon-button.component.html",
-  styleUrls: ["./icon-button.component.scss"],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: "cis-icon-button",
+    templateUrl: "./icon-button.component.html",
+    styleUrls: ["./icon-button.component.scss"],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class IconButtonComponent {
 

@@ -3,10 +3,11 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit } 
 import { Consumable, ConsumableRarity } from "../../interfaces"
 
 @Component({
-  selector: "cis-consumable",
-  templateUrl: "./consumable.component.html",
-  styleUrls: ["./consumable.component.scss"],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: "cis-consumable",
+    templateUrl: "./consumable.component.html",
+    styleUrls: ["./consumable.component.scss"],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class ConsumableComponent {
 

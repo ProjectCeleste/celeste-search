@@ -15,10 +15,11 @@ import { map, tap } from "rxjs/operators"
 import { StateService } from "../services"
 
 @Component({
-  selector: "cis-search",
-  templateUrl: "./search.component.html",
-  styleUrls: ["./search.component.scss"],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: "cis-search",
+    templateUrl: "./search.component.html",
+    styleUrls: ["./search.component.scss"],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class SearchComponent implements OnInit, AfterViewInit {
 

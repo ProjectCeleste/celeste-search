@@ -5,7 +5,8 @@ import { Offering } from "../services"
 import { PricePipe } from "./price-pipe"
 
 @Pipe({
-  name: "priceRange",
+    name: "priceRange",
+    standalone: false
 })
 export class PriceRangePipe implements PipeTransform {
 

@@ -3,10 +3,11 @@ import { ChangeDetectionStrategy, Component, Input } from "@angular/core"
 import { Blueprint, Item, MarketplaceQuery } from "../../interfaces"
 
 @Component({
-  selector: "cis-shell",
-  templateUrl: "./shell.component.html",
-  styleUrls: ["./shell.component.scss"],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: "cis-shell",
+    templateUrl: "./shell.component.html",
+    styleUrls: ["./shell.component.scss"],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class ShellComponent {
 

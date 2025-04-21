@@ -14,10 +14,11 @@ import { Item } from "../../interfaces"
 import { DbService, SettingsService } from "../../services"
 
 @Component({
-  selector: "cis-item",
-  templateUrl: "./item.component.html",
-  styleUrls: ["./item.component.scss"],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: "cis-item",
+    templateUrl: "./item.component.html",
+    styleUrls: ["./item.component.scss"],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class ItemComponent implements OnInit, OnDestroy {
 

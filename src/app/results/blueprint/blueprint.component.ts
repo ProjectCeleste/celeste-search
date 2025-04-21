@@ -6,10 +6,11 @@ import { Blueprint } from "../../interfaces"
 import { DbService } from "../../services"
 
 @Component({
-  selector: "cis-blueprint",
-  templateUrl: "./blueprint.component.html",
-  styleUrls: ["./blueprint.component.scss"],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: "cis-blueprint",
+    templateUrl: "./blueprint.component.html",
+    styleUrls: ["./blueprint.component.scss"],
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    standalone: false
 })
 export class BlueprintComponent {
 
