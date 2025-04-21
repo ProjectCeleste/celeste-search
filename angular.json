@@ -9,7 +9,6 @@
           "builder": "@angular-devkit/build-angular:browser",
           "configurations": {
             "production": {
-              "aot": true,
               "budgets": [
                 {
                   "maximumError": "5mb",
@@ -38,7 +37,6 @@
             }
           },
           "options": {
-            "aot": true,
             "assets": [
               "src/assets",
               "src/favicon.ico",
@@ -61,8 +59,15 @@
             "styles": [
               "src/styles/styles.scss"
             ],
-            "tsConfig": "src/tsconfig.app.json"
-          }
+            "tsConfig": "src/tsconfig.app.json",
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
+          },
+          "defaultConfiguration": ""
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
