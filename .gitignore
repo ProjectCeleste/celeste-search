@@ -1,3 +1,4 @@
+/.angular/cache
 .release-it.json
 *.log
 archive
