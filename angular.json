@@ -71,18 +71,18 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "celeste-search:build"
+            "buildTarget": "celeste-search:build"
           }
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "celeste-search:build:production"
+              "buildTarget": "celeste-search:build:production"
             }
           },
           "options": {
-            "browserTarget": "celeste-search:build"
+            "buildTarget": "celeste-search:build"
           }
         },
         "test": {
