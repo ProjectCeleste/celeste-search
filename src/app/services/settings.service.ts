@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core"
-import { FormControl } from "@angular/forms"
+import { UntypedFormControl } from "@angular/forms"
 
 export interface Settings {
   precision: number
@@ -14,12 +14,12 @@ const storageKey = "setting"
 })
 export class SettingsService {
 
-  precision = new FormControl()
-  maxColumns = new FormControl()
-  defaultToEverything = new FormControl()
+  precision = new UntypedFormControl()
+  maxColumns = new UntypedFormControl()
+  defaultToEverything = new UntypedFormControl()
 
   private readonly controls: {
-    [K in keyof Settings]: FormControl
+    [K in keyof Settings]: UntypedFormControl
   } = {
     precision: this.precision,
     maxColumns: this.maxColumns,

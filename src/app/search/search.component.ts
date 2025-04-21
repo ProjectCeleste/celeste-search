@@ -7,7 +7,7 @@ import {
   OnInit,
   ViewChild,
 } from "@angular/core"
-import { FormControl } from "@angular/forms"
+import { UntypedFormControl } from "@angular/forms"
 
 import { NgScrollbar } from "ngx-scrollbar"
 import { map, tap } from "rxjs/operators"
@@ -25,7 +25,7 @@ export class SearchComponent implements OnInit, AfterViewInit {
   @Input() scrollbarRef: NgScrollbar
   @ViewChild("inputRef", { static: true }) inputRef: ElementRef
 
-  readonly inputModel = new FormControl()
+  readonly inputModel = new UntypedFormControl()
 
   input = ""
   isEmpty = this.inputModel.valueChanges.pipe(map(input => !input))
