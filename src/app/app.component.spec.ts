@@ -1,5 +1,5 @@
 import { HttpClientModule } from "@angular/common/http"
-import { async, TestBed } from "@angular/core/testing"
+import { TestBed, waitForAsync } from "@angular/core/testing"
 import { ReactiveFormsModule } from "@angular/forms"
 import { BrowserModule } from "@angular/platform-browser"
 import { RouterModule } from "@angular/router"
@@ -20,14 +20,14 @@ import { SearchComponent } from "./search/search.component"
 import { TabsComponent } from "./tabs/tabs.component"
 
 describe("AppComponent", () => {
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [
         BrowserModule,
         HttpClientModule,
         NgScrollbarModule,
         ReactiveFormsModule,
-        RouterModule.forRoot([]),
+        RouterModule.forRoot([], { relativeLinkResolution: 'legacy' }),
         ClickOutsideModule,
       ],
       declarations: [
