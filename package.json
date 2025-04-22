@@ -67,7 +67,6 @@
     "minimatch": "^3.1.2",
     "normalize.scss": "^0.1.0",
     "package.json": "^2.0.1",
-    "parser": "^0.1.4",
     "path": "^0.12.7",
     "plugin-error": "^1.0.1",
     "plur": "^4.0.0",
