@@ -3,9 +3,8 @@
   <ng-container *ngFor="let col of [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]">
     <div class="__col" *ngIf="numColumns > col && displayed.length > col">
 
-      <ng-container @fadeIn *ngFor="let result of displayed; trackBy: trackResult; index as i">
-
-        <div @fadeIn *ngIf="i % numColumns === col">
+      <div @fadeIn *ngFor="let result of displayed; trackBy: trackResult; index as i">
+        <div *ngIf="i % numColumns === col">
           <ng-container *ngIf="tab === 0">
             <cis-item [item]="result"></cis-item>
           </ng-container>
@@ -25,8 +24,7 @@
             <cis-material [material]="result"></cis-material>
           </ng-container>
         </div>
-
-      </ng-container>
+      </div>
 
     </div>
   </ng-container>

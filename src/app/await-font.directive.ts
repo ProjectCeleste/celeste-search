@@ -1,6 +1,5 @@
 import { Directive, ElementRef, Input, OnInit } from "@angular/core"
-
-import * as FontFaceObserver from "fontfaceobserver"
+import FontFaceObserver from "fontfaceobserver"
 
 export interface AwaitFontOptions {
   family: string
