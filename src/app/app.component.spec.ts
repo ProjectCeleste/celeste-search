@@ -5,7 +5,6 @@ import { BrowserModule } from "@angular/platform-browser"
 import { RouterModule } from "@angular/router"
 
 import { ClickOutsideModule } from "ng-click-outside"
-import { NgScrollbarModule } from "ngx-scrollbar"
 
 import { AppComponent } from "./app.component"
 import { AwaitFontDirective } from "./await-font.directive"
@@ -37,7 +36,6 @@ describe("AppComponent", () => {
         TabsComponent,
     ],
     imports: [BrowserModule,
-        NgScrollbarModule,
         ReactiveFormsModule,
         RouterModule.forRoot([], {}),
         ClickOutsideModule],

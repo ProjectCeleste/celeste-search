@@ -5,9 +5,10 @@ import {
   OnInit,
 } from "@angular/core"
 
-import { NgScrollbar } from "ngx-scrollbar"
-import { Observable } from "rxjs"
+import { Observable, fromEvent } from "rxjs"
 import { map } from "rxjs/operators"
+
+import { ScrollbarComponent } from "../scrollbar/scrollbar.component"
 
 @Component({
     selector: "cis-back-to-top",
@@ -18,19 +19,22 @@ import { map } from "rxjs/operators"
 })
 export class BackToTopComponent implements OnInit {
 
-  @Input() scrollbarRef: NgScrollbar
+  @Input() scrollbarRef: ScrollbarComponent
   shown: Observable<boolean>
 
   ngOnInit() {
-    const scrollbar = this.scrollbarRef.scrollable
-
-    this.shown = scrollbar.elementScrolled().pipe(
-      map(() => scrollbar.measureScrollOffset("top") > 0),
-    )
+    const container = this.scrollbarRef.elementRef.nativeElement.querySelector('.scrollbar-container');
+    if (container) {
+      this.shown = fromEvent(container, 'scroll').pipe(
+        map(() => container.scrollTop > 0)
+      );
+    }
   }
 
   scrollToTop() {
-    this.scrollbarRef.scrollToTop()
+    const container = this.scrollbarRef.elementRef.nativeElement.querySelector('.scrollbar-container');
+    if (container) {
+      container.scrollTop = 0;
+    }
   }
-
 }

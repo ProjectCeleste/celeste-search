@@ -47,7 +47,8 @@ import { TabsComponent } from "./tabs/tabs.component"
 import { TooltipComponent } from "./tooltip/tooltip.component"
 import { UpdateComponent } from "./update/update.component"
 
-@NgModule({ declarations: [
+@NgModule({
+    declarations: [
         AdvisorComponent,
         AppComponent,
         AwaitFontDirective,
@@ -82,12 +83,16 @@ import { UpdateComponent } from "./update/update.component"
         UpdateComponent,
         VendorsComponent,
     ],
-    bootstrap: [AppComponent], imports: [BrowserModule,
+    imports: [
+        BrowserModule,
         BrowserAnimationsModule,
         ReactiveFormsModule,
         RouterModule.forRoot([], {}),
-        ServiceWorkerModule.register("ngsw-worker.js", { enabled: environment.production })], providers: [
+        ServiceWorkerModule.register("ngsw-worker.js", { enabled: environment.production })
+    ],
+    providers: [
         PricePipe,
         provideHttpClient(withInterceptorsFromDi()),
-    ] })
+    ]
+})
 export class AppModule { }

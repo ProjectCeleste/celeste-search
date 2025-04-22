@@ -9,10 +9,10 @@ import {
 } from "@angular/core"
 import { UntypedFormControl } from "@angular/forms"
 
-import { NgScrollbar } from "ngx-scrollbar"
 import { map, tap } from "rxjs/operators"
 
 import { StateService } from "../services"
+import { ScrollbarComponent } from "../scrollbar/scrollbar.component"
 
 @Component({
     selector: "cis-search",
@@ -23,7 +23,7 @@ import { StateService } from "../services"
 })
 export class SearchComponent implements OnInit, AfterViewInit {
 
-  @Input() scrollbarRef: NgScrollbar
+  @Input() scrollbarRef: ScrollbarComponent
   @ViewChild("inputRef", { static: true }) inputRef: ElementRef
 
   readonly inputModel = new UntypedFormControl()
@@ -41,7 +41,12 @@ export class SearchComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.inputModel.valueChanges.pipe(
-      tap(() => this.scrollbarRef.scrollToTop()),
+      tap(() => {
+        const container = this.scrollbarRef.elementRef.nativeElement.querySelector('.scrollbar-container');
+        if (container) {
+          container.scrollTop = 0;
+        }
+      }),
       tap(input => this.state.search = input),
     ).subscribe()
   }
@@ -69,8 +74,11 @@ export class SearchComponent implements OnInit, AfterViewInit {
       return
     }
 
-    const y = this.scrollbarRef.scrollable.measureScrollOffset("top")
+    const container = this.scrollbarRef.elementRef.nativeElement.querySelector('.scrollbar-container');
+    const y = container ? container.scrollTop : 0;
     this.inputRef.nativeElement.focus()
-    this.scrollbarRef.scrollYTo(y)
+    if (container) {
+      container.scrollTop = y;
+    }
   }
 }
