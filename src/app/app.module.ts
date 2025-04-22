@@ -7,7 +7,6 @@ import { RouterModule } from "@angular/router"
 import { ServiceWorkerModule } from "@angular/service-worker"
 
 import { ClickOutsideModule } from "ng-click-outside"
-import { NgScrollbarModule } from "ngx-scrollbar"
 
 import { environment } from "../environments/environment"
 
@@ -87,7 +86,6 @@ import { UpdateComponent } from "./update/update.component"
     ],
     bootstrap: [AppComponent], imports: [BrowserModule,
         BrowserAnimationsModule,
-        NgScrollbarModule,
         ReactiveFormsModule,
         RouterModule.forRoot([], {}),
         ClickOutsideModule,
