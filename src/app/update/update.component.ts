@@ -3,7 +3,8 @@ import {
   ChangeDetectorRef,
   Component,
 } from "@angular/core"
-import { SwUpdate } from "@angular/service-worker"
+import { SwUpdate, VersionReadyEvent } from "@angular/service-worker"
+import { filter } from "rxjs/operators"
 
 import { enterLeft } from "../animations"
 
@@ -43,11 +44,11 @@ export class UpdateComponent {
     if (!swUpdate.isEnabled) {
       return
     }
-    swUpdate.available.subscribe(() => this.setState("available"))
-    swUpdate.activated.subscribe(() => this.setState("idle"))
-
-    swUpdate.available.subscribe(console.log)
-    swUpdate.activated.subscribe(console.log)
+    
+    // Subscribe to version updates
+    this.swUpdate.versionUpdates
+      .pipe(filter((evt): evt is VersionReadyEvent => evt.type === 'VERSION_READY'))
+      .subscribe(() => this.setState("available"))
   }
 
   setState(state: SwState) {
@@ -65,5 +66,4 @@ export class UpdateComponent {
 
     this.setState(order[next])
   }
-
 }
