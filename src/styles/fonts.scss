@@ -7,7 +7,7 @@
   src:
     local('Lato Light '),
     local('Lato-Light'),
-    url('~typeface-lato/files/lato-latin-300.woff2') format('woff2');
+    url('../assets/fonts/lato-latin-300.woff2') format('woff2');
 }
 
 /* lato-400normal - latin */
@@ -19,7 +19,7 @@
   src:
     local('Lato Regular '),
     local('Lato-Regular'),
-    url('~typeface-lato/files/lato-latin-400.woff2') format('woff2');
+    url('../assets/fonts/lato-latin-400.woff2') format('woff2');
 }
 
 /* lato-700normal - latin */
@@ -31,5 +31,5 @@
   src:
     local('Lato Bold '),
     local('Lato-Bold'),
-    url('~typeface-lato/files/lato-latin-700.woff2') format('woff2');
+    url('../assets/fonts/lato-latin-700.woff2') format('woff2');
 }

@@ -11,6 +11,7 @@ const sprites = require("./scripts/sprites")
 exports.build = build
 exports.bg = bg
 exports.copy = copy
+exports.copyFonts = copy.copyFonts
 exports.icons = icons
 exports.meta = meta
 exports.optimize = optimize
@@ -18,5 +19,5 @@ exports.sprites = sprites
 
 exports.default = series(
   parallel(bg, icons, meta, sprites),
-  parallel(optimize, copy),
+  parallel(optimize, copy, copy.copyFonts),
 )

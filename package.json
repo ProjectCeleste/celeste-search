@@ -30,16 +30,17 @@
   "author": "Abraham Schilling",
   "scripts": {
     "build": "gulp build",
+    "copy-fonts": "gulp copyFonts",
     "db": "ts-node --project db/tsconfig.json db/cli.ts",
     "db:watch": "nodemon --watch db --ext * --exec npm run db",
-    "dev": "ng serve --open",
+    "dev": "npm run copy-fonts && ng serve --open",
     "e2e": "ng e2e",
     "generate": "rm -rf generated && npm run db && npm run gulp",
     "gulp": "gulp",
     "lint": "ng lint",
     "prod": "npm run build && http-server dist/celeste-search",
-    "serve": "ng serve",
-    "start": "ng serve",
+    "serve": "npm run copy-fonts && ng serve",
+    "start": "npm run copy-fonts && ng serve",
     "test": "ng test"
   },
   "dependencies": {
