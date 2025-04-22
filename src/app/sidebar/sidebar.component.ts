@@ -2,6 +2,8 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  ElementRef,
+  HostListener,
 } from "@angular/core"
 
 import { enterLeaveRight } from "../animations"
@@ -21,7 +23,15 @@ export class SidebarComponent {
 
   constructor(
     private changeRef: ChangeDetectorRef,
+    private elementRef: ElementRef
   ) { }
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent) {
+    if (this.isOpen && !this.elementRef.nativeElement.contains(event.target)) {
+      this.close();
+    }
+  }
 
   open() {
     this.isOpen = true

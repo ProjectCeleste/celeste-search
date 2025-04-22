@@ -6,8 +6,6 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations"
 import { RouterModule } from "@angular/router"
 import { ServiceWorkerModule } from "@angular/service-worker"
 
-import { ClickOutsideModule } from "ng-click-outside"
-
 import { environment } from "../environments/environment"
 
 import { AppComponent } from "./app.component"
@@ -88,7 +86,6 @@ import { UpdateComponent } from "./update/update.component"
         BrowserAnimationsModule,
         ReactiveFormsModule,
         RouterModule.forRoot([], {}),
-        ClickOutsideModule,
         ServiceWorkerModule.register("ngsw-worker.js", { enabled: environment.production })], providers: [
         PricePipe,
         provideHttpClient(withInterceptorsFromDi()),
