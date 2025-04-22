@@ -93,6 +93,7 @@ import { UpdateComponent } from "./update/update.component"
     providers: [
         PricePipe,
         provideHttpClient(withInterceptorsFromDi()),
-    ]
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }
