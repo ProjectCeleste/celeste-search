@@ -1,6 +1,6 @@
 const { src, dest, series } = require("gulp")
 const del = require("del")
-const responsive = require("gulp-responsive")
+const { sharpStream } = require("./utils/sharp-utils")
 
 const paths = {
   in: "assets/logo.png",
@@ -29,7 +29,7 @@ const generateAppIcons = () => {
   }))
 
   return src(paths.in)
-    .pipe(responsive({ "*": images }, { silent: true }))
+    .pipe(sharpStream({ images, silent: true }))
     .pipe(dest(paths.out))
     .pipe(dest("src/assets/meta"))
 }

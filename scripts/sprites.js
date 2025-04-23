@@ -1,5 +1,5 @@
 const { src, dest, parallel } = require("gulp")
-const responsive = require("gulp-responsive")
+const { sharpStream } = require("./utils/sharp-utils")
 const spritesmith = require("gulp.spritesmith")
 
 function toRoundedPercent(value) {
@@ -69,18 +69,23 @@ const sprite = (name, size) => {
   }
   const config = { base: "generated" }
   const imageSizes = {
-    "**": {
-      width: size,
-      height: size,
-      quality: 100,
-    },
+    width: size,
+    height: size,
+    quality: 100,
   }
   const imageConfig = {
     silent: true,
   }
 
   const fn = () => src(paths.in, config)
-    .pipe(responsive(imageSizes, imageConfig))
+    .pipe(sharpStream({ 
+      images: [{ 
+        width: size, 
+        height: size, 
+        quality: 100 
+      }], 
+      silent: true 
+    }))
     .pipe(spritesmith({
       imgName: `${name}.png`,
       cssName: `${name}.scss`,

@@ -3,7 +3,7 @@ const { writeFile, ensureDir } = require("fs-extra")
 const webp = require('gulp-webp')
 const debug = require("gulp-debug")
 const del = require("del")
-const responsive = require("gulp-responsive")
+const { sharpStream } = require("./utils/sharp-utils")
 
 const ratio = 9 / 16
 const sourceWidth = 2048
@@ -13,7 +13,7 @@ const paths = {
 }
 
 /**
- * Determines the images sizes for `gulp-responsive`.
+ * Determines the images sizes for Sharp processing.
  */
 function buildImagesConfigs(exponents) {
   const images = []
@@ -99,7 +99,7 @@ async function generateBGs(done) {
   const images = buildImagesConfigs([1, 1.25, 1.5, 2])
 
   const writeImages = () => src(paths.in)
-    .pipe(responsive({ "*": images }, { silent: true }))
+    .pipe(sharpStream({ images, silent: true }))
     .pipe(webp())
     .pipe(debug())
     .pipe(dest(paths.out))
