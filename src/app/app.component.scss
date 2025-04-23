@@ -1,7 +1,8 @@
-@import "imports";
+@use "../styles/imports" as *;
+@use "sass:math";
 
 $spacing-body: 3 * $spacing-viewport;
-$spacing-buttons: $spacing-body / 2;
+$spacing-buttons: math.div($spacing-body, 2);
 
 :host {
   position: relative;
@@ -21,7 +22,7 @@ $spacing-buttons: $spacing-body / 2;
 
     background: rgba(white, 0.25);
     border-radius: $border-radius;
-    padding: ($spacing-viewport / 2);
+    padding: math.div($spacing-viewport, 2);
 
     cis-search {
       padding: 0.5rem;

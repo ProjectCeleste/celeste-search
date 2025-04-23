@@ -1,15 +1,15 @@
-@import "../assets/bg/bg";
-@import "../assets/sprites/materials";
-@import "../assets/sprites/items";
-@import "../assets/sprites/advisors";
-@import "../assets/sprites/blueprints";
-@import "../assets/sprites/designs";
-@import "../assets/sprites/consumables";
+@use "../assets/bg/bg" as bg;
+@use "../assets/sprites/materials" as materials;
+@use "../assets/sprites/items" as items;
+@use "../assets/sprites/advisors" as advisors;
+@use "../assets/sprites/blueprints" as blueprints;
+@use "../assets/sprites/designs" as designs;
+@use "../assets/sprites/consumables" as consumables;
 
-@import "imports";
-@import "reset";
-@import "animation";
-@import "aoeo";
+@use "imports" as imports;
+@use "reset" as reset;
+@use "animation" as animation;
+@use "aoeo" as aoeo;
 
 html,
 body {

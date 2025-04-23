@@ -1,6 +1,6 @@
-@import "normalize.scss/normalize";
-@import "fonts";
-@import "imports";
+@use "normalize.scss/normalize";
+@use "fonts";
+@use "imports" as *;
 
 * {
   box-sizing: border-box !important;

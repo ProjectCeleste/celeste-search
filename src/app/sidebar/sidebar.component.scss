@@ -1,4 +1,5 @@
-@import "imports";
+@use "../../styles/imports" as *;
+@use "sass:math";
 
 :host {
   position: relative;
@@ -39,7 +40,7 @@
     margin: 0.5rem;
     flex: 1;
     box-shadow: none;
-    border-radius: $border-radius / 2;
+    border-radius: math.div($border-radius, 2);
     background: $theme-secondary;
     color: $theme-text;
     transition-property: background-color;
