@@ -2,6 +2,7 @@ import crypto from "crypto"
 import { copy, mkdirp } from "fs-extra"
 import nanoid from "nanoid"
 import { dirname } from "path"
+import chalk from "chalk"
 
 import { download } from "./download"
 
@@ -34,6 +35,9 @@ async function fetch(path: string, spriteName: string, iconName?: string) {
   const url = `https://images.projectceleste.com/${imagePath}`
 
   const filename = await download(url, { responseType: 'arraybuffer' })
+  if (!filename) {
+    throw new Error(`Failed to download icon from ${url}`)
+  }
   await mkdirp(dirname(spriteInput))
   await copy(filename, spriteInput)
 

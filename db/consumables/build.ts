@@ -54,7 +54,6 @@ export async function buildConsumables(): Promise<Consumable[]> {
       descriptionPower = descriptionPower + exactUnits
     }
     
-
     const design = await findDesigns(consumable.name)
 
     const rarity: Consumable["rarities"][string] = {
@@ -93,7 +92,6 @@ export async function buildConsumables(): Promise<Consumable[]> {
       result.civilization = 'Greek or Egyptian'
     }
 
-    
     const vendorData = await findVendors(result.id);
 
     (vendorData || []).forEach(vendor => {
@@ -122,9 +120,7 @@ export async function buildConsumables(): Promise<Consumable[]> {
       merged.vendors.push(vendorData[i])
     }
 
-    
     merged.search = await buildSearchString(merged,consumable)
-
 
     merged.marketplace = Object.keys(merged.rarities).reduce((queries, key) => {
       queries.push({

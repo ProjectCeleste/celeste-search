@@ -33,8 +33,8 @@ export async function download(url: string, options: AxiosRequestConfig): Promis
   }
 
   if (await pathExists(filename)) {
-    cache[filename] = Promise.resolve()
-    return filename
+    cache[filename] = Promise.resolve(filename)
+    return cache[filename];
   }
 
   const config = Object.assign({}, options, {
@@ -55,7 +55,9 @@ export async function download(url: string, options: AxiosRequestConfig): Promis
     const response = await cache[filename]
     data = isApiRequest.test(filename)
       ? JSON.stringify(response.data, null, 2)
-      : response.data
+      : options.responseType === 'arraybuffer'
+        ? response.data
+        : response.data
 
     // Patch for wrong format
     if(url == "https://api.projectceleste.com/gamedb/languages?language=English") {
@@ -65,18 +67,24 @@ export async function download(url: string, options: AxiosRequestConfig): Promis
       const obj = keyName(response.data)
       data = JSON.stringify(obj, null, 2)
     }
+
+    await mkdirp(dirname(filename))
+    await writeFile(filename, data)
   } catch (error: unknown) {
+    if (axios.isAxiosError(error) && error.response?.status === 404) {
+      console.warn(chalk.yellow(`Resource not found (404): ${url}`))
+      return Promise.resolve(filename)
+    }
+    
     if (error instanceof Error) {
-      console.error(error.stack)
+      console.error('Error downloading:', error.stack)
     } else {
       console.error('An unknown error occurred:', error)
     }
+    throw error // Re-throw the error to be handled by the caller
   }
 
-  await mkdirp(dirname(filename))
-  await writeFile(filename, data)
-
-  return filename
+  return Promise.resolve(filename)
 }
 
 

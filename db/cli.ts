@@ -11,43 +11,49 @@ async function cleanup() {
   console.log("Cleanup...")
 
   const dirs = [
+    "generated",
     "generated/db",
-    "generated/sprites",
     "src/app/interfaces",
     "src/assets/db",
   ]
 
   for (const dir of dirs) {
     await ensureDir(dir)
-    await remove(`${dir}/*`)
+    await remove(dir)
+    await ensureDir(dir)
   }
+}
+
+async function writeDBFiles(filename: string, data: any) {
+  console.log(`Writing ${filename}`)
+  await writeFile(`generated/db/${filename}.json`, JSON.stringify(data, null, 2), "utf8")
+  await writeFile(`src/assets/db/${filename}.json`, JSON.stringify(data), "utf8")
 }
 
 async function createDB() {
   console.log("Build...")
 
   const items = await buildItems()
+  await writeDBFiles('items', items)
+
+  console.log('Starting Building advisors')
   const advisors = await buildAdvisors()
+  await writeDBFiles('advisors', advisors)
+
   const blueprints = await buildBlueprints()
+  await writeDBFiles('blueprints', blueprints)
+
   const designs = await buildDesigns()
+  await writeDBFiles('designs', designs)
+
   const consumables = await buildConsumables()
+  await writeDBFiles('consumables', consumables)
+
   const materials = await buildMaterials()
+  await writeDBFiles('materials', materials)
+
   const sharedMaterials = await buildSharedMaterials(items, blueprints, designs)
-
-  const results = {
-    items,
-    advisors,
-    blueprints,
-    designs,
-    consumables,
-    materials,
-    shared: { materials: sharedMaterials },
-  }
-
-  for (const key of Object.keys(results)) {
-    await writeFile(`generated/db/${key}.json`, JSON.stringify(results[key], null, 2), "utf8")
-    await writeFile(`src/assets/db/${key}.json`, JSON.stringify(results[key]), "utf8")
-  }
+  await writeDBFiles('shared', { materials: sharedMaterials })
 }
 
 async function copyInterfaces() {
