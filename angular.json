@@ -30,7 +30,7 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "serviceWorker": true
+              "serviceWorker": "ngsw-config.json"
             }
           },
           "options": {
@@ -139,5 +139,8 @@
       "root": "e2e/"
     }
   },
-  "version": 1
+  "version": 1,
+  "cli": {
+    "analytics": false
+  }
 }
