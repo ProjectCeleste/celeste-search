@@ -13,6 +13,7 @@ const displayNames = {
   Damage: "Damage",
   DamageBonusReduction: "Bonus Damage Protection",
   HitPercent: "Critical Hit Chance",
+  HitPercentDamageMultiplier: "Critical Hit Damage",
   Hitpoints: "Health",
   LOS: "Line-of-sight",
   /*MaximumRange: "Maximum Range",*/

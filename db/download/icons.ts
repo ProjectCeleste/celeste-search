@@ -40,10 +40,11 @@ async function fetch(path: string, spriteName: string, iconName?: string) {
   return iconId
 }
 
-async function fetchLocalOverride(path: string, spriteName: string, iconName?: string) {
+async function fetchLocalOverride(path: string, spriteName: string, iconName?: string): Promise<string> {
   const iconId = hash(path)
   const imagePath = path.replace(/\\/g, "/") + ".png"
   const spriteInput = `generated/sprites/${spriteName}/${iconName || iconId}.png`
   await mkdirp(dirname(spriteInput))
   await copy(imagePath, spriteInput)
+  return iconId
 }

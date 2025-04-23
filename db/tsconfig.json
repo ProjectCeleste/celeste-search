@@ -5,7 +5,12 @@
     "outDir": "../out-tsc/db",
     "types": [
       "node"
-    ]
+    ],
+    "strict": false,
+    "noImplicitAny": false,
+    "target": "es2018",
+    "moduleResolution": "node",
+    "esModuleInterop": true
   },
   "exclude": [
     ".cache"

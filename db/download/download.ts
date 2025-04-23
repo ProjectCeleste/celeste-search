@@ -29,8 +29,7 @@ export async function download(url: string, options: AxiosRequestConfig): Promis
     .join("/")
 
   if (cache[filename]) {
-    await cache[filename]
-    return filename
+    return cache[filename]
   }
 
   if (await pathExists(filename)) {
@@ -66,8 +65,12 @@ export async function download(url: string, options: AxiosRequestConfig): Promis
       const obj = keyName(response.data)
       data = JSON.stringify(obj, null, 2)
     }
-  } catch (error) {
-    console.error(error.stack)
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      console.error(error.stack)
+    } else {
+      console.error('An unknown error occurred:', error)
+    }
   }
 
   await mkdirp(dirname(filename))
