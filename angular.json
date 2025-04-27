@@ -38,21 +38,9 @@
               "src/assets",
               "src/favicon.ico",
               "src/manifest.json",
-              {
-                "glob": "robots.txt",
-                "input": "src",
-                "output": "."
-              },
-              {
-                "glob": "robots.prod.txt",
-                "input": "src",
-                "output": "."
-              },
-              {
-                "glob": "sitemap.xml",
-                "input": "src",
-                "output": "."
-              }
+              "src/robots.txt",
+              "src/robots.prod.txt",
+              "src/sitemap.xml"
             ],
             "index": "src/index.html",
             "outputPath": {
