@@ -9,7 +9,7 @@ function app() {
 }
 
 async function sitemap() {
-  return src(`${dist}/sitemap.xml`)
+  return src("src/sitemap.xml")
     .pipe(replace(/__LASTMOD__/g, new Date().toISOString()))
     .pipe(dest(dist))
 }
