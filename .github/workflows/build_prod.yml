@@ -14,12 +14,12 @@ jobs:
           node-version: 22.14.0
       - run: npm install
       - run: npm run build
-      - run: mv dist/celeste-search/robots.prod.txt dist/celeste-search/robots.txt
+      - run: mv dist/celeste-search/browser/robots.prod.txt dist/celeste-search/browser/robots.txt
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: dist
-          path: dist/celeste-search
+          path: dist/celeste-search/browser
   deploy:
     needs: build
     runs-on: ubuntu-latest
