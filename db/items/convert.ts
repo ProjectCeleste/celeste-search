@@ -76,6 +76,11 @@ export async function convertItem(trait: Trait): Promise<Item> {
     if (trait.traittype.toLowerCase().startsWith("vanity")) {
       item.levels = [1]
     }
+    if (trait.rarity.toLowerCase().startsWith("legendary")) {
+      item.levels = [40]
+      item.name = item.name.concat(' - Legacy Item') 
+      item.type = item.type.concat(' - Legacy Item') 
+    }
     /*if (isStartingGear(trait)) {
       item.levels = [20]
     }*/
