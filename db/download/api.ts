@@ -265,4 +265,9 @@ export class API {
     return json
   }
 
+  static async getReforgeItemBlacklist() {
+    const json = await get("/gamedb/ReforgeItemBlacklist")
+    return json
+  }
+
 }

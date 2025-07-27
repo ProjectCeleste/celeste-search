@@ -2,6 +2,8 @@ import { Trait } from "../../api-types"
 
 import { quests } from "./quests"
 
+import { API } from "../download"
+
 const cyprusLegendaries = [
   "arrowoh_l001",
   "bow1h_l001",
@@ -290,6 +292,18 @@ export function isWinter2023Reward(trait: Trait) {
   return trait.name.endsWith("_winter2023")
 }
 
+export function isSummer2025Reward(trait: Trait) {
+  return trait.name.startsWith("se2025_")
+}
+
+export function isHalloween2025Reward(trait: Trait) {
+  return trait.name.endsWith("_halloween2025")
+}
+
+export function isWinter2025Reward(trait: Trait) {
+  return trait.name.endsWith("_winter2025")
+}
+
 
 export function isEventReward(trait: Trait) {
   return isHalloween2018Reward(trait)
@@ -310,6 +324,9 @@ export function isEventReward(trait: Trait) {
     //no new summer 2023
     || isHalloween2023Reward(trait)
     || isWinter2023Reward(trait)
+    || isSummer2025Reward(trait)
+    || isHalloween2025Reward(trait)
+    || isWinter2025Reward(trait)
 }
 
 export function isBahramReward(trait: Trait) {
@@ -328,6 +345,11 @@ export function isLevel40StartingGear(trait: Trait) {
   return trait.name.endsWith("_r202")
 }
 
+export async function isReforgeItemBlacklist(trait: Trait) {
+  const reforgeItemBlacklist = await API.getReforgeItemBlacklist()
+  return reforgeItemBlacklist.includes(trait.name)
+}
+
 /**
  * Only legendaries are reforgeable, so we only need to look
  * at a few items.
@@ -338,6 +360,7 @@ export function isReforgeable(trait: Trait) {
     && !isQuestReward(trait)
     && (!isEventReward(trait) || isEventReforgeIgnoreList(trait))
     && !isBahramReward(trait)
+ //   && !isReforgeItemBlacklist(trait)
 }
 
 export function isClassicItem(trait: Trait) {

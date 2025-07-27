@@ -9,7 +9,7 @@ export interface Material {
   rarity: string
   event?: {
     name: "halloween" | "winter" | "summer"
-    year: 0 | 2018 | 2019 | 2020 | 2021 | 2022 | 2023,
+    year: 0 | 2018 | 2019 | 2020 | 2021 | 2022 | 2023 | 2025,
   } | undefined
   lootTable?: string
   quest?: { 
