@@ -1,5 +1,5 @@
 const { src, dest, series } = require("gulp")
-const del = require("del")
+const { deleteAsync } = require("del")
 const { sharpStream } = require("./utils/sharp-utils")
 
 const paths = {
@@ -10,7 +10,7 @@ const paths = {
 /**
  * Deletes all current app icons.
  */
-const deleteAppIcons = () => del(paths.out + "/*")
+const deleteAppIcons = () => deleteAsync(paths.out + "/*")
 
 /**
  * Generates multiple sizes of the app icon.
@@ -28,7 +28,7 @@ const generateAppIcons = () => {
     quality: 100,
   }))
 
-  return src(paths.in)
+  return src(paths.in, { encoding: false })
     .pipe(sharpStream({ images, silent: true }))
     .pipe(dest(paths.out))
     .pipe(dest("src/assets/meta"))

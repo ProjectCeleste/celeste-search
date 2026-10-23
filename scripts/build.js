@@ -1,14 +1,14 @@
 const { src, dest, series, parallel } = require("gulp")
-const exec = require("execa")
+const { execa } = require("execa")
 const replace = require("gulp-replace")
 
-const dist = "dist/celeste-search"
+const dist = "dist/celeste-search/browser"
 
 function app() {
-  return exec.shell("npx ng build -c production", { stdio: "inherit" })
+  return execa("npx", ["ng", "build", "-c", "production"], { stdio: "inherit" })
 }
 
-async function sitemap() {
+function sitemap() {
   return src("src/sitemap.xml")
     .pipe(replace(/__LASTMOD__/g, new Date().toISOString()))
     .pipe(dest(dist))

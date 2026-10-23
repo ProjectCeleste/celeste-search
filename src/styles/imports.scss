@@ -12,7 +12,7 @@ $border-radius: 0.75rem;
 $spacing-viewport: 6vmin;
 
 @mixin elevation($z) {
-  @include elevation.mdc-elevation($z, $theme-shadow, 0);
+  @include elevation.elevation($z, $theme-shadow, 0);
 }
 
 @mixin border() {

@@ -4,30 +4,40 @@
   <!-- EFFECTS -->
   <div class="row --effects">
     <ul>
-      <li *ngFor="let effect of item.effects || []" [class.--positive]="effect.beneficial"
-        [class.--negative]="!effect.beneficial">
-        <span>
-          {{ effect.name }}
-          <ng-container *ngIf="!effect.action">:</ng-container>
-        </span>
-        <span class="__value --left" *ngIf="!effect.action">
-          {{ effect | effectValue:level:1 }}
-        </span>
-        <cis-tooltip class="__value --right" text="Effect Range (+/- 5%)" *ngIf="!effect.action && item.effectsRange && effect.name != 'Ignore Armor'">
-          {{
-          (effect | effectValue:level:0.95).slice(0, -1) +
-          ' — ' +
-          (effect | effectValue:level:1.05).slice(1)
-          }}
-        </cis-tooltip>
-        <cis-tooltip class="__value --right" text="Effect Range (+/- 5%)" *ngIf="!effect.action && item.effectsRange && effect.name == 'Ignore Armor'">
-          +{{
-          ((((effect | effectValue:level:1).slice(0, -1) - 100) * 1.05) + 100).toFixed(1) +
-          ' — ' +
-          ((((effect | effectValue:level:1).slice(0, -1) - 100) * 0.95) + 100).toFixed(1)
-          }}%
-        </cis-tooltip>
-      </li>
+      @for (effect of item.effects || []; track effect) {
+        <li [class.--positive]="effect.beneficial"
+          [class.--negative]="!effect.beneficial">
+          <span>
+            {{ effect.name }}
+            @if (!effect.action) {
+              :
+            }
+          </span>
+          @if (!effect.action) {
+            <span class="__value --left">
+              {{ effect | effectValue:level:1 }}
+            </span>
+          }
+          @if (!effect.action && item.effectsRange && effect.name != 'Ignore Armor') {
+            <cis-tooltip class="__value --right" text="Effect Range (+/- 5%)">
+              {{
+              (effect | effectValue:level:0.95).slice(0, -1) +
+              ' — ' +
+              (effect | effectValue:level:1.05).slice(1)
+              }}
+            </cis-tooltip>
+          }
+          @if (!effect.action && item.effectsRange && effect.name == 'Ignore Armor') {
+            <cis-tooltip class="__value --right" text="Effect Range (+/- 5%)">
+              +{{
+              ((((effect | effectValue:level:1).slice(0, -1) - 100) * 1.05) + 100).toFixed(1) +
+              ' — ' +
+              ((((effect | effectValue:level:1).slice(0, -1) - 100) * 0.95) + 100).toFixed(1)
+              }}%
+            </cis-tooltip>
+          }
+        </li>
+      }
     </ul>
   </div>
 
@@ -44,186 +54,210 @@
       Available at levels:&nbsp;&nbsp;
     </span>
 
-    <ng-container *ngIf="item.levels.length > 1">
-      <ng-container *ngFor="let level of item.levels">
-
+    @if (item.levels.length > 1) {
+      @for (level of item.levels; track level) {
         <cis-tooltip class="__level" [text]="level">
           <button type="button" (click)="setLevel(level)">
             {{ level }}
           </button>
         </cis-tooltip>
+      }
+    }
 
-      </ng-container>
-    </ng-container>
-
-    <ng-container *ngIf="item.levels.length < 2">
+    @if (item.levels.length < 2) {
       <div class="__level">
         {{ item.levels[0] || '?' }}
       </div>
-    </ng-container>
+    }
   </div>
 
   <!-- RECIPE -->
-  <ng-container *ngIf="item.recipe">
-    <ng-container *ngIf="materials | async as materials">
-
+  @if (item.recipe) {
+    @if (materials | async; as materials) {
       <div class="__recipe">
         <div class="row --source">
           <span>Craftable at</span>
           <span>&nbsp;<strong>{{ item.recipe!.school }} School</strong></span>
-          <span *ngIf="item.recipe!.level !== level">—&nbsp;&nbsp;Level
-            {{ item.recipe!.level }}</span>:
+          @if (item.recipe!.level !== level) {
+            <span>—&nbsp;&nbsp;Level
+            {{ item.recipe!.level }}</span>
+            }:
+          </div>
+          <div class="row --materials">
+            @for (ref of item.recipe!.materials; track ref) {
+              @if (materials![ref.id]; as mat) {
+                <div class="icon-materials-container">
+                  <span class="icon--materials icon--materials--{{ mat.icon }}"></span>
+                </div>
+                <span class="__mat-amount">{{ ref.quantity }}</span>
+                <span class="--{{ mat.rarity }}">{{ mat.name }}</span>
+                <span></span><!-- wrap line -->
+                <span></span><!-- wrap line -->
+                <span></span><!-- wrap line -->
+                <span></span><!-- wrap line -->
+              }
+            }
+          </div>
+        </div>
+      }
+    }
+
+    <!-- Vanity -->
+    @if (item.visualfactor) {
+      <div>
+        <div class="row --source"></div>
+        <div class="row --materials">
+          <span>Vanity in Scenario Editor: {{ item.visualfactor }}</span>
+        </div>
+      </div>
+    }
+
+    <!-- QUEST -->
+    @if (item.quest) {
+      <div>
+        <div class="row --source"></div>
+        <div class="row --materials">
+          <div class="icon-materials-container">
+            <span class="icon--materials icon--materials--{{ item.event?.name || 'quest' }}"></span>
+          </div>
+          <span>Reward from:</span>
         </div>
         <div class="row --materials">
-          <ng-container *ngFor="let ref of item.recipe!.materials">
-            <ng-container *ngIf="materials![ref.id] as mat">
-              <div class="icon-materials-container">
-                <span class="icon--materials icon--materials--{{ mat.icon }}"></span>
-              </div>
-              <span class="__mat-amount">{{ ref.quantity }}</span>
-              <span class="--{{ mat.rarity }}">{{ mat.name }}</span>
-              <span></span><!-- wrap line -->
-              <span></span><!-- wrap line -->
-              <span></span><!-- wrap line -->
-              <span></span><!-- wrap line -->
-            </ng-container>
-          </ng-container>
-        </div>
-      </div>
-
-    </ng-container>
-  </ng-container>
-
-  <!-- Vanity -->
-  <div *ngIf="item.visualfactor">
-    <div class="row --source"></div>
-  
-    <div class="row --materials">
-        <span>Vanity in Scenario Editor: {{ item.visualfactor }}</span>
-    </div>
-  </div>
-
-  <!-- QUEST -->
-  <div *ngIf="item.quest">
-    <div class="row --source"></div>
-  
-    <div class="row --materials">
-      <div class="icon-materials-container">
-        <span class="icon--materials icon--materials--{{ item.event?.name || 'quest' }}"></span>    
-      </div>
-        <span>Reward from:</span>
-    </div>
-    <div class="row --materials">
-        <ul style="font-size: 14px">
-          <li>
-              <span *ngIf="item.quest"  style="color: #f5e100"><b>Region:</b></span>
+          <ul style="font-size: 14px">
+            <li>
+              @if (item.quest) {
+                <span  style="color: #f5e100"><b>Region:</b></span>
+              }
               <span>&nbsp;&nbsp;</span>
               <span>{{ item.quest.Region }}</span>
-          </li>
-          <li>
-              <span *ngIf="item.quest"  style="color:#f5e100"><b>Quest:</b></span>
+            </li>
+            <li>
+              @if (item.quest) {
+                <span  style="color:#f5e100"><b>Quest:</b></span>
+              }
               <span>&nbsp;&nbsp;</span>
               <span>{{ item.quest.Quest }}</span>
-          </li>
-          <li>
-              <span *ngIf="item.quest"  style="color:#f5e100"><b>Quest Giver:</b></span>
+            </li>
+            <li>
+              @if (item.quest) {
+                <span  style="color:#f5e100"><b>Quest Giver:</b></span>
+              }
               <span>&nbsp;&nbsp;</span>
               <span>{{ item.quest.Quest_Giver }}</span>
-          </li>
-          <li>
-              <span *ngIf="item.quest"  style="color:#f5e100"><b>Prerequisite:</b></span>
+            </li>
+            <li>
+              @if (item.quest) {
+                <span  style="color:#f5e100"><b>Prerequisite:</b></span>
+              }
               <span>&nbsp;&nbsp;</span>
               <span>{{ item.quest.Quest_Starter }}</span>
-          </li>
-        </ul>
-    </div>
-  </div>
-
-  <!-- EVENT -->
-  <div *ngIf="item.event">
-    <div class="row --source">
-      <span>Exclusive to:</span>
-    </div>
-
-    <div class="row --materials">
-      <div class="icon-materials-container">
-        <span class="icon--materials icon--materials--{{ item.event?.name || 'quest' }}"></span>
+            </li>
+          </ul>
+        </div>
       </div>
-      <span *ngIf="item.event">
-        {{ item.event!.name | titlecase }} Event
-      </span>
-    </div>
-  </div>
+    }
 
-  <div *ngIf="item.event">
-    <div class="row --source">
-      <span *ngIf="item.event">
-        <span>First Appeared in:   </span>
-        <span *ngIf="item.event.year">{{ item.event!.year }}</span> 
-        <div>Event items may get discontinued. Check again next year.</div>
-      </span>
-    </div>
-  </div>
-
-  <!-- LOOT TABLE -->
-  <div *ngIf="item.lootTable">
-    <div class="row --loot-table">
-      <div class="icon-materials-container">
-        <span class="icon--materials icon--materials--{{ item.lootTable.replace(' ', '_').replace('\'', '') }}"></span>
-      </div>
-      <span *ngIf="item.lootTable">
-        Exclusive to <strong>{{ item.lootTable | titlecase }}</strong>
-      </span>
-    </div>
-  </div>
-
-  <!-- STARTING GEAR -->
-  <div *ngIf="item.starting?.length">
-    <div *ngIf="level < 21">
-      <div class="row --source">
-        <span>
-          Pro Civilization Starting Gear:
-        </span>
-      </div>
-
-      <div class="row --materials">
-        <ng-container *ngFor="let civ of item.starting">
+    <!-- EVENT -->
+    @if (item.event) {
+      <div>
+        <div class="row --source">
+          <span>Exclusive to:</span>
+        </div>
+        <div class="row --materials">
           <div class="icon-materials-container">
-            <span class="icon--materials icon--materials--{{ civ }}"></span>
+            <span class="icon--materials icon--materials--{{ item.event?.name || 'quest' }}"></span>
           </div>
-          <span>{{ civ | titlecase }}</span>
-          <span></span><!-- wrap line -->
-          <span></span><!-- wrap line -->
-          <span></span><!-- wrap line -->
-          <span></span><!-- wrap line -->
-          <span></span><!-- wrap line -->
-        </ng-container>
+          @if (item.event) {
+            <span>
+              {{ item.event!.name | titlecase }} Event
+            </span>
+          }
+        </div>
       </div>
-    </div>
+    }
 
-    <div *ngIf="level > 22">
-      <div class="row --source">
-        <span>
-          Level 40 Civilization Starting Gear:
-        </span>
+    @if (item.event) {
+      <div>
+        <div class="row --source">
+          @if (item.event) {
+            <span>
+              <span>First Appeared in:   </span>
+              @if (item.event.year) {
+                <span>{{ item.event!.year }}</span>
+              }
+              <div>Event items may get discontinued. Check again next year.</div>
+            </span>
+          }
+        </div>
       </div>
+    }
 
-      <div class="row --materials">
-        <ng-container *ngFor="let civ of item.starting">
+    <!-- LOOT TABLE -->
+    @if (item.lootTable) {
+      <div>
+        <div class="row --loot-table">
           <div class="icon-materials-container">
-            <span class="icon--materials icon--materials--{{ civ }}"></span>
+            <span class="icon--materials icon--materials--{{ item.lootTable.replace(' ', '_').replace('\'', '') }}"></span>
           </div>
-          <span>{{ civ | titlecase }}</span>
-          <span></span><!-- wrap line -->
-          <span></span><!-- wrap line -->
-          <span></span><!-- wrap line -->
-          <span></span><!-- wrap line -->
-          <span></span><!-- wrap line -->
-        </ng-container>
+          @if (item.lootTable) {
+            <span>
+              Exclusive to <strong>{{ item.lootTable | titlecase }}</strong>
+            </span>
+          }
+        </div>
       </div>
-    </div>
-  </div>
+    }
 
-  <cis-vendors [vendors]="item.vendors" [levels]="item.levels"></cis-vendors>
+    <!-- STARTING GEAR -->
+    @if (item.starting?.length) {
+      <div>
+        @if (level < 21) {
+          <div>
+            <div class="row --source">
+              <span>
+                Pro Civilization Starting Gear:
+              </span>
+            </div>
+            <div class="row --materials">
+              @for (civ of item.starting; track civ) {
+                <div class="icon-materials-container">
+                  <span class="icon--materials icon--materials--{{ civ }}"></span>
+                </div>
+                <span>{{ civ | titlecase }}</span>
+                <span></span><!-- wrap line -->
+                <span></span><!-- wrap line -->
+                <span></span><!-- wrap line -->
+                <span></span><!-- wrap line -->
+                <span></span><!-- wrap line -->
+              }
+            </div>
+          </div>
+        }
+        @if (level > 22) {
+          <div>
+            <div class="row --source">
+              <span>
+                Level 40 Civilization Starting Gear:
+              </span>
+            </div>
+            <div class="row --materials">
+              @for (civ of item.starting; track civ) {
+                <div class="icon-materials-container">
+                  <span class="icon--materials icon--materials--{{ civ }}"></span>
+                </div>
+                <span>{{ civ | titlecase }}</span>
+                <span></span><!-- wrap line -->
+                <span></span><!-- wrap line -->
+                <span></span><!-- wrap line -->
+                <span></span><!-- wrap line -->
+                <span></span><!-- wrap line -->
+              }
+            </div>
+          </div>
+        }
+      </div>
+    }
 
-</cis-shell>
+    <cis-vendors [vendors]="item.vendors" [levels]="item.levels"></cis-vendors>
+
+  </cis-shell>

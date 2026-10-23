@@ -1,40 +1,32 @@
 <!-- MARKETPLACE -->
-<ng-container *ngIf="groups | async as groups">
-  <ng-container *ngIf="groups.length > 0">
-
+@if (groups | async; as groups) {
+  @if (groups.length > 0) {
     <div class="row --source">
       <span>Sold at <strong>Global Marketplace</strong></span>:
     </div>
-
     <div class="row --materials">
-      <ng-container *ngFor="let group of groups">
-
+      @for (group of groups; track group) {
         <div class="icon-materials-container">
           <span class="icon--materials icon--materials--coin"></span>
         </div>
-
         <span>{{ group.offerings | priceRange }}</span>
         <span>{{ 'coin' | currency }}</span>
-
-        <ng-container *ngIf="group.rarity && queries.length > 1">
+        @if (group.rarity && queries.length > 1) {
           <span class="--note">—</span>
           <span class="--{{ group.rarity }}">{{ group.rarity | titlecase }}</span>
-        </ng-container>
-
-        <ng-container *ngIf="group.level && queries.length > 1">
+        }
+        @if (group.level && queries.length > 1) {
           <span class="--note">—</span>
           <span>Level {{ group.level }}</span>
-        </ng-container>
-
+        }
         <span class="--note">—</span>
         <span class="--note">
           {{ group.offerings.length | i18nPlural:{ '=1' : '1 Offer', 'other' : '# Offers' } }}
         </span>
-
-        <span *ngIf="!group.rarity && !group.level"></span><!-- wrap line -->
-
-      </ng-container>
-    </div>
-
-  </ng-container>
-</ng-container>
+        @if (!group.rarity && !group.level) {
+          <span></span>
+          }<!-- wrap line -->
+        }
+      </div>
+    }
+  }

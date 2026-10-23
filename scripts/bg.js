@@ -1,8 +1,8 @@
 const { src, dest, series, parallel } = require("gulp")
 const { writeFile, ensureDir } = require("fs-extra")
-const webp = require('gulp-webp')
-const debug = require("gulp-debug")
-const del = require("del")
+const webp = require("gulp-webp").default
+const debug = require("gulp-debug").default
+const { deleteAsync } = require("del")
 const { sharpStream } = require("./utils/sharp-utils")
 
 const ratio = 9 / 16
@@ -90,7 +90,7 @@ ${rules.join(eol + eol)}
 /**
  * Deletes previously generated background images.
  */
-const deleteBGs = () => del(paths.out + "/*")
+const deleteBGs = () => deleteAsync(paths.out + "/*")
 
 /**
  * Generates multiple sizes of background images.
@@ -98,7 +98,7 @@ const deleteBGs = () => del(paths.out + "/*")
 async function generateBGs(done) {
   const images = buildImagesConfigs([1, 1.25, 1.5, 2])
 
-  const writeImages = () => src(paths.in)
+  const writeImages = () => src(paths.in, { encoding: false })
     .pipe(sharpStream({ images, silent: true }))
     .pipe(webp())
     .pipe(debug())

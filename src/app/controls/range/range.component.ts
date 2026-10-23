@@ -6,6 +6,7 @@ import {
   OnChanges,
   SimpleChanges,
   ViewChild,
+  ChangeDetectionStrategy
 } from "@angular/core"
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms"
 
@@ -22,6 +23,7 @@ import { noop } from "lodash"
             multi: true,
         },
     ],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class InputRangeComponent implements ControlValueAccessor, OnChanges {

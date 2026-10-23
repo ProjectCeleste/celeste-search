@@ -3,153 +3,185 @@
   sprite="consumables"
   [vendors]="consumable.vendors"
   [marketplace]="consumable.marketplace"
->
-    <div class="row --header">
-        <div
-          class="row --rarities"
-          *ngIf="rarities.length > 0"
+  >
+  <div class="row --header">
+    @if (rarities.length > 0) {
+      <div
+        class="row --rarities"
         >
-          <ng-container *ngFor="let rarity of rarities">
-
+        @for (rarity of rarities; track rarity) {
+          @if (rarities.length > 1) {
             <cis-tooltip
               [text]="rarity | titlecase"
-              *ngIf="rarities.length > 1"
-            >
+              >
               <button
                 type="button"
                 class="__rarity --{{ rarity }}"
                 (click)="setRarity(rarity)"
-              >
+                >
                 {{ rarity }}
               </button>
             </cis-tooltip>
-
+          }
+          @if (rarities.length === 1) {
             <div
               class="__rarity --{{ rarity }}"
-              *ngIf="rarities.length === 1"
-            >
+              >
               {{ rarity }}
-              
             </div>
-            
-
-          </ng-container>
-        </div>
-    </div>
-
-    <!-- NAME -->
-    <div class="row --name">
-        <div class="icon--consumables icon--consumables--{{ rarity.icon }}"></div>
-        <div class="__name --{{ rarity }}">
-            {{ consumable.name }}
-        </div>
-    </div>
-
-    <!-- DESCRIPTION -->
-    <div class="row --description --positive">
-        {{ rarity.description }}
-    </div>
-
-    <!-- POWERS -->
-    <div *ngIf="consumable.power">
-
-      <div class="row --source">
-        <div *ngIf="rarity.requiredage > 0">
-          <span>Required Age: <strong>{{ rarity.requiredage }}</strong></span>
-        </div>
-        <div *ngIf="!rarity.requiredage">
-          <span>Required Age: <strong>1</strong></span>
-        </div>
+          }
+        }
       </div>
+    }
+  </div>
 
+  <!-- NAME -->
+  <div class="row --name">
+    <div class="icon--consumables icon--consumables--{{ rarity.icon }}"></div>
+    <div class="__name --{{ rarity }}">
+      {{ consumable.name }}
+    </div>
+  </div>
 
-        <div *ngIf="rarity.activetime > 0">
-            Duration: 
-              <strong *ngIf="rarity.activetime > 60">{{ rarity.activetime/60 - (rarity.activetime % 60)/60}}</strong> <span *ngIf="rarity.activetime > 60">m</span>
-              <strong *ngIf="rarity.activetime % 60 != 0"> {{ rarity.activetime % 60 }}</strong> <span *ngIf="rarity.activetime % 60 != 0">s</span>
+  <!-- DESCRIPTION -->
+  <div class="row --description --positive">
+    {{ rarity.description }}
+  </div>
+
+  <!-- POWERS -->
+  @if (consumable.power) {
+    <div>
+      <div class="row --source">
+        @if (rarity.requiredage > 0) {
+          <div>
+            <span>Required Age: <strong>{{ rarity.requiredage }}</strong></span>
+          </div>
+        }
+        @if (!rarity.requiredage) {
+          <div>
+            <span>Required Age: <strong>1</strong></span>
+          </div>
+        }
+      </div>
+      @if (rarity.activetime > 0) {
+        <div>
+          Duration:
+          @if (rarity.activetime > 60) {
+            <strong>{{ rarity.activetime/60 - (rarity.activetime % 60)/60}}</strong>
+            } @if (rarity.activetime > 60) {
+            <span>m</span>
+          }
+          @if (rarity.activetime % 60 != 0) {
+            <strong> {{ rarity.activetime % 60 }}</strong>
+            } @if (rarity.activetime % 60 != 0) {
+            <span>s</span>
+          }
         </div>
-        <div *ngIf="rarity.activetime <= 0">
+      }
+      @if (rarity.activetime <= 0) {
+        <div>
           <span>Activates immediately</span>
         </div>
-
-        <div *ngIf="rarity.cooldowntime > 0">
-             <span>Cooldown (Class <strong>{{ rarity.cooldownstackingclass }}): </strong></span>
-              <strong *ngIf="rarity.cooldowntime > 60">{{ rarity.cooldowntime/60 - (rarity.cooldowntime % 60)/60 }}</strong> <span *ngIf="rarity.cooldowntime > 60">m</span>
-              <strong *ngIf="rarity.cooldowntime % 60 != 0"> {{ rarity.cooldowntime % 60 }}</strong> <span *ngIf="rarity.cooldowntime % 60 != 0">s</span>
+      }
+      @if (rarity.cooldowntime > 0) {
+        <div>
+          <span>Cooldown (Class <strong>{{ rarity.cooldownstackingclass }}): </strong></span>
+          @if (rarity.cooldowntime > 60) {
+            <strong>{{ rarity.cooldowntime/60 - (rarity.cooldowntime % 60)/60 }}</strong>
+            } @if (rarity.cooldowntime > 60) {
+            <span>m</span>
+          }
+          @if (rarity.cooldowntime % 60 != 0) {
+            <strong> {{ rarity.cooldowntime % 60 }}</strong>
+            } @if (rarity.cooldowntime % 60 != 0) {
+            <span>s</span>
+          }
         </div>
-        <div *ngIf="rarity.cooldowntime <= 0">
+      }
+      @if (rarity.cooldowntime <= 0) {
+        <div>
           <span>No Cooldown</span>
         </div>
-
-        <div *ngIf="rarity.radius > 0">
-           <span>Affected area: <strong>{{ rarity.radius }}</strong></span>
+      }
+      @if (rarity.radius > 0) {
+        <div>
+          <span>Affected area: <strong>{{ rarity.radius }}</strong></span>
         </div>
-
-        <div *ngIf="rarity.placement === 'forcedAtTC'">
+      }
+      @if (rarity.placement === 'forcedAtTC') {
+        <div>
           <span>Summoned at TC</span>
         </div>
-        <div *ngIf="rarity.placement != 'forcedAtTC'">
+      }
+      @if (rarity.placement != 'forcedAtTC') {
+        <div>
           <span>Can be placed anywhere on the map</span>
         </div>
-
-        <span><strong>Only usable while on a quest</strong></span>
-      
+      }
+      <span><strong>Only usable while on a quest</strong></span>
     </div>
+  }
 
-    <div *ngIf="!consumable.power">
+  @if (!consumable.power) {
+    <div>
       <div class="row --source">
-          <span><strong>Used outside of quests</strong></span>
+        <span><strong>Used outside of quests</strong></span>
       </div>
     </div>
-  
-    <div class="row --source">
-      <span>Stack size: <strong>{{ rarity.stacksize }}</strong></span>
-    </div>
+  }
 
-    <!-- EVENT -->
-    <div *ngIf="consumable.event">
+  <div class="row --source">
+    <span>Stack size: <strong>{{ rarity.stacksize }}</strong></span>
+  </div>
+
+  <!-- EVENT -->
+  @if (consumable.event) {
+    <div>
       <div class="row --source">
         <span>Exclusive to:</span>
       </div>
-
       <div class="row --materials">
         <div class="icon-materials-container">
           <span class="icon--materials icon--materials--{{ consumable.event?.name || 'quest' }}"></span>
         </div>
-        <span *ngIf="consumable.event">
-          {{ consumable.event!.name | titlecase }} Event
-          <!-- <span *ngIf="consumable.event.year">{{ consumable.event!.year }}</span> -->
-        </span>
+        @if (consumable.event) {
+          <span>
+            {{ consumable.event!.name | titlecase }} Event
+            <!-- <span *ngIf="consumable.event.year">{{ consumable.event!.year }}</span> -->
+          </span>
+        }
       </div>
     </div>
+  }
 
-    <!-- Design -->
-    <div *ngIf="rarity.design">
-
+  <!-- Design -->
+  @if (rarity.design) {
+    <div>
       <div class="row --source">
-        <span>Can be crafted: 
+        <span>Can be crafted:
           <strong>
-          <a href="{{mainURL}}/?tab=3&search={{rarity.design}}"> Here
-          </a>
-        </strong>
+            <a href="{{mainURL}}/?tab=3&search={{rarity.design}}"> Here
+            </a>
+          </strong>
         </span>
       </div>
-      
     </div>
+  }
 
-    
-        <!-- REQUIRED CIV -->
+
+  <!-- REQUIRED CIV -->
+  @if (consumable.civilization) {
     <div
       class="row --civ"
-      *ngIf="consumable.civilization"
-    >
-        <div class="row --footer">
-          <strong>Requires {{ consumable.civilization | titlecase }}
-            civilization</strong>
-        </div>
+      >
+      <div class="row --footer">
+        <strong>Requires {{ consumable.civilization | titlecase }}
+        civilization</strong>
+      </div>
     </div>
+  }
 
-    <div class="row --source">
-    </div>
+  <div class="row --source">
+  </div>
 
 </cis-shell>

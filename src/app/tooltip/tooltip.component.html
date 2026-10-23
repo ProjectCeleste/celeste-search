@@ -1,2 +1,4 @@
 <ng-content></ng-content>
-<div class="tooltip" *ngIf="text" [innerHTML]="text"></div>
+@if (text) {
+  <div class="tooltip" [innerHTML]="text"></div>
+}

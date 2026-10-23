@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http"
 import { Injectable } from "@angular/core"
 
 import { combineLatest, Observable } from "rxjs"
-import { map, publishReplay, refCount } from "rxjs/operators"
+import { map, shareReplay } from "rxjs/operators"
 
 import {
   Advisor,
@@ -48,8 +48,7 @@ export class DbService {
 
   private fetch<T>(name: string) {
     return this.http.get<T>(`/assets/db/${name}.json`).pipe(
-      publishReplay(1),
-      refCount(),
+      shareReplay({ bufferSize: 1, refCount: true }),
     )
   }
 

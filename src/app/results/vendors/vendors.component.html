@@ -1,48 +1,40 @@
-<ng-container *ngIf="vendors?.length">
-  <ng-container *ngFor="let vendor of vendors">
-
+@if (vendors?.length) {
+  @for (vendor of vendors; track vendor) {
     <div class="row --source">
       <span>Purchasable at</span>
       <span>&nbsp;<strong>{{ vendor.name }}</strong>,&nbsp;</span>
-      <span *ngIf="!vendor.blueprint">{{ vendor.location }}</span>
-      <span *ngIf="vendor.blueprint">&nbsp;(Blueprint)</span>
+      @if (!vendor.blueprint) {
+        <span>{{ vendor.location }}</span>
+      }
+      @if (vendor.blueprint) {
+        <span>&nbsp;(Blueprint)</span>
+      }
       <span>:</span>
-
-      <ng-container *ngIf="vendor.rotation">
+      @if (vendor.rotation) {
         <span class="__note --note">({{ vendor.rotation }} Legendary
-          Rotation)</span>
-      </ng-container>
+        Rotation)</span>
+      }
     </div>
-
     <div class="row --materials">
-
-
-      <ng-container *ngIf="vendor.quantity > 1">
+      @if (vendor.quantity > 1) {
         <span><strong>{{ vendor.quantity | number }}</strong> pieces for </span>
-      </ng-container>
-
-      <ng-container *ngIf="vendor.quantity === 1">
+      }
+      @if (vendor.quantity === 1) {
         <span><strong>{{ vendor.quantity | number }}</strong>  piece for </span>
-      </ng-container>
-
+      }
       <div class="icon-materials-container">
         <span class="icon--materials icon--materials--{{ vendor.currency.toLowerCase() }}"></span>
       </div>
-
-
       <span>{{ vendor.price | price }}</span>
       <span>{{ vendor.currency | currency }}</span>
-
-      <ng-container *ngIf="vendor.level && levels?.length > 1">
+      @if (vendor.level && levels?.length > 1) {
         <span>—</span>
         <span>Level {{ vendor.level }}</span>
-      </ng-container>
-
-      <ng-container *ngIf="vendor.rarity">
+      }
+      @if (vendor.rarity) {
         <span>—</span>
         <span class="--{{ vendor.rarity }}">{{ vendor.rarity | titlecase }}</span>
-      </ng-container>
+      }
     </div>
-
-  </ng-container>
-</ng-container>
+  }
+}

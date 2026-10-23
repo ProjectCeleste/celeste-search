@@ -1,33 +1,44 @@
 <div class="__wrapper">
 
   <!-- TYPE / RARITY -->
-  <div *ngIf="type || rarity" class="row --header">
-    <strong>{{ type }}</strong>
-
-    <div class="__rarity --{{ rarity }}">
-      {{ rarity }}
+  @if (type || rarity) {
+    <div class="row --header">
+      <strong>{{ type }}</strong>
+      <div class="__rarity --{{ rarity }}">
+        {{ rarity }}
+      </div>
     </div>
-  </div>
+  }
 
   <!-- ICON / NAME -->
-  <div *ngIf="icon && sprite || name" class="row --name">
-    <div *ngIf="icon && sprite" class="icon--{{ sprite }} icon--{{ sprite }}--{{ icon }}">
+  @if (icon && sprite || name) {
+    <div class="row --name">
+      @if (icon && sprite) {
+        <div class="icon--{{ sprite }} icon--{{ sprite }}--{{ icon }}">
+        </div>
+      }
+      @if (name) {
+        <div class="__name --{{ rarity }}">
+          {{ name }}
+        </div>
+      }
     </div>
-    <div *ngIf="name" class="__name --{{ rarity }}">
-      {{ name }}
-    </div>
-  </div>
+  }
 
   <!-- DESCRIPTION -->
-  <div *ngIf="description" class="row --description --positive">
-    {{ description }}
-  </div>
+  @if (description) {
+    <div class="row --description --positive">
+      {{ description }}
+    </div>
+  }
 
   <!-- CUSTOM CONTENT -->
   <ng-content></ng-content>
 
   <!-- SOURCES -->
-  <cis-vendors *ngIf="vendors" [vendors]="vendors" [levels]="levels" [rarities]="rarities"></cis-vendors>
+  @if (vendors) {
+    <cis-vendors [vendors]="vendors" [levels]="levels" [rarities]="rarities"></cis-vendors>
+  }
   <cis-marketplace [queries]="marketplace">
   </cis-marketplace>
 

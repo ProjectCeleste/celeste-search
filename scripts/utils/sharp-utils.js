@@ -2,7 +2,7 @@ const sharp = require('sharp');
 const path = require('path');
 const fs = require('fs-extra');
 const { ensureDir } = require('fs-extra');
-const through = require('through2');
+const { Transform } = require('stream');
 const { promisify } = require('util');
 
 /**
@@ -15,7 +15,7 @@ const { promisify } = require('util');
 function sharpStream(options) {
   const { images, silent = true } = options;
   
-  return through.obj(async function(file, enc, cb) {
+  return new Transform({ objectMode: true, async transform(file, enc, cb) {
     if (file.isNull()) {
       return cb(null, file);
     }
@@ -66,7 +66,7 @@ function sharpStream(options) {
       }
       cb(err);
     }
-  });
+  } });
 }
 
 /**

@@ -7,12 +7,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v5
       - name: Use Node.js
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v5
         with:
-          node-version: 22.14.0
-      - run: npm install
+          node-version-file: .nvmrc
+      - run: npm ci
       - run: npm run build
       - run: mv dist/celeste-search/browser/robots.prod.txt dist/celeste-search/browser/robots.txt
       - name: Upload artifact

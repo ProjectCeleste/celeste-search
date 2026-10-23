@@ -5,7 +5,7 @@
     "celeste-search": {
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:application",
+          "builder": "@angular/build:application",
           "configurations": {
             "production": {
               "budgets": [
@@ -31,6 +31,16 @@
               "outputHashing": "all",
               "sourceMap": false,
               "serviceWorker": "ngsw-config.json"
+            },
+            "testing": {
+              "aot": false,
+              "assets": [
+                "src/assets"
+              ],
+              "polyfills": [
+                "zone.js",
+                "zone.js/testing"
+              ]
             }
           },
           "options": {
@@ -47,7 +57,7 @@
               "base": "dist/celeste-search"
             },
             "polyfills": [
-              "src/polyfills.ts"
+              "zone.js"
             ],
             "scripts": [],
             "stylePreprocessorOptions": {
@@ -69,13 +79,13 @@
           "defaultConfiguration": ""
         },
         "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "builder": "@angular/build:extract-i18n",
           "options": {
             "buildTarget": "celeste-search:build"
           }
         },
         "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
+          "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
               "buildTarget": "celeste-search:build:production"
@@ -86,25 +96,14 @@
           }
         },
         "test": {
-          "builder": "@angular-devkit/build-angular:karma",
+          "builder": "@angular/build:unit-test",
           "options": {
-            "assets": [
-              "src/assets"
+            "tsConfig": "src/tsconfig.spec.json",
+            "reporters": [
+              "default"
             ],
-            "karmaConfig": "src/karma.conf.js",
-            "main": "src/test.ts",
-            "polyfills": "src/polyfills.ts",
-            "scripts": [],
-            "stylePreprocessorOptions": {
-              "includePaths": [
-                "node_modules",
-                "src/styles"
-              ]
-            },
-            "styles": [
-              "src/styles/styles.scss"
-            ],
-            "tsConfig": "src/tsconfig.spec.json"
+            "buildTarget": ":build:testing",
+            "runner": "vitest"
           }
         }
       },
@@ -117,30 +116,36 @@
         }
       },
       "sourceRoot": "src"
-    },
-    "celeste-search-e2e": {
-      "architect": {
-        "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
-          "configurations": {
-            "production": {
-              "devServerTarget": "celeste-search:serve:production",
-              "port": 8000
-            }
-          },
-          "options": {
-            "devServerTarget": "celeste-search:serve",
-            "protractorConfig": "e2e/protractor.conf.js"
-          }
-        }
-      },
-      "prefix": "",
-      "projectType": "application",
-      "root": "e2e/"
     }
   },
   "version": 1,
   "cli": {
     "analytics": false
+  },
+  "schematics": {
+    "@schematics/angular:component": {
+      "type": "component"
+    },
+    "@schematics/angular:directive": {
+      "type": "directive"
+    },
+    "@schematics/angular:service": {
+      "type": "service"
+    },
+    "@schematics/angular:guard": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:interceptor": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:module": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:pipe": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:resolver": {
+      "typeSeparator": "."
+    }
   }
 }

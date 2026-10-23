@@ -3,16 +3,15 @@
   [marketplace]="blueprint.marketplace">
 
   <!-- COST -->
-  <ng-container *ngIf="blueprint.materials?.length > 0">
-    <ng-container *ngIf="(materials | async) as materials">
-
+  @if (blueprint.materials?.length > 0) {
+    @if ((materials | async); as materials) {
       <div class="__recipe">
         <div class="row --source">
           Cost:
         </div>
         <div class="row --materials">
-          <ng-container *ngFor="let ref of blueprint.materials">
-            <ng-container *ngIf="materials[ref.id] as mat">
+          @for (ref of blueprint.materials; track ref) {
+            @if (materials[ref.id]; as mat) {
               <div class="icon-materials-container">
                 <span class="icon--materials icon--materials--{{ mat.icon }}"></span>
               </div>
@@ -22,46 +21,52 @@
               <span></span><!-- wrap line -->
               <span></span><!-- wrap line -->
               <span></span><!-- wrap line -->
-            </ng-container>
-          </ng-container>
+            }
+          }
         </div>
       </div>
+    }
+  }
 
-    </ng-container>
-  </ng-container>
-  
   <div class="row --source">
     <span>Stack size: <strong>{{ blueprint.stacksize }}</strong></span>
   </div>
 
   <!-- EVENT -->
-  <div *ngIf="blueprint.event">
-    <div class="row --source">
-      <span>Exclusive to:</span>
-    </div>
-
-    <div class="row --materials">
-      <div class="icon-materials-container">
-        <span class="icon--materials icon--materials--{{ blueprint.event?.name || 'quest' }}"></span>
+  @if (blueprint.event) {
+    <div>
+      <div class="row --source">
+        <span>Exclusive to:</span>
       </div>
-      <span *ngIf="blueprint.event">
-        {{ blueprint.event!.name | titlecase }} Event
-        <!-- <span *ngIf="blueprint.event.year">{{ blueprint.event!.year }}</span> -->
-      </span>
+      <div class="row --materials">
+        <div class="icon-materials-container">
+          <span class="icon--materials icon--materials--{{ blueprint.event?.name || 'quest' }}"></span>
+        </div>
+        @if (blueprint.event) {
+          <span>
+            {{ blueprint.event!.name | titlecase }} Event
+            <!-- <span *ngIf="blueprint.event.year">{{ blueprint.event!.year }}</span> -->
+          </span>
+        }
+      </div>
     </div>
-  </div>
+  }
 
   <!-- LOOT TABLE -->
-  <div *ngIf="blueprint.lootTable">
-    <div class="row --loot-table">
-      <div class="icon-materials-container">
-        <span
+  @if (blueprint.lootTable) {
+    <div>
+      <div class="row --loot-table">
+        <div class="icon-materials-container">
+          <span
           class="icon--materials icon--materials--{{ blueprint.lootTable.replace(' ', '_').replace('\'', '') }}"></span>
+        </div>
+        @if (blueprint.lootTable) {
+          <span>
+            Exclusive to <strong>{{ blueprint.lootTable | titlecase }}</strong>
+          </span>
+        }
       </div>
-      <span *ngIf="blueprint.lootTable">
-        Exclusive to <strong>{{ blueprint.lootTable | titlecase }}</strong>
-      </span>
     </div>
-  </div>
+  }
 
 </cis-shell>

@@ -3,12 +3,14 @@
     "outDir": "../out-tsc/app",
     "types": []
   },
-  "extends": "../tsconfig.json",
+  "extends": "../tsconfig.json",
   "files": [
-    "main.ts",
-    "polyfills.ts"
+    "main.ts"
   ],
   "include": [
     "src/**/*.d.ts"
-  ]
+  ],
+  "angularCompilerOptions": {
+    "strictTemplates": false
+  }
 }

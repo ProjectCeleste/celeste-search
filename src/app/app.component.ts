@@ -1,4 +1,4 @@
-import { Component } from "@angular/core"
+import { Component, ChangeDetectionStrategy } from "@angular/core"
 import { DomSanitizer } from "@angular/platform-browser"
 
 import { SwService, UrlService } from "./services"
@@ -13,6 +13,7 @@ const columnWidth = "30rem"
     selector: "cis-root",
     templateUrl: "./app.component.html",
     styleUrls: ["./app.component.scss"],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class AppComponent {

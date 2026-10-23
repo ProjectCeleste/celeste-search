@@ -1,5 +1,5 @@
 const { src, dest } = require("gulp")
-const debug = require("gulp-debug")
+const debug = require("gulp-debug").default
 
 /**
  * Copies assets that don't need compression, nor any other
@@ -17,7 +17,7 @@ const copy = () => src([
 const copyFonts = () => src([
   `node_modules/typeface-lato/files/*.woff2`,
   `node_modules/typeface-lato/files/*.woff`,
-], { base: "node_modules/typeface-lato/files" })
+], { base: "node_modules/typeface-lato/files", encoding: false })
   .pipe(debug())
   .pipe(dest("src/assets/fonts"))
 

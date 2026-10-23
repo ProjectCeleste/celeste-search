@@ -11,21 +11,22 @@
   </div>
 
   <!-- DESCRIPTION -->
-  <div *ngIf="design.description" class="row --description --positive">
-    {{ design.description }}
-  </div>
+  @if (design.description) {
+    <div class="row --description --positive">
+      {{ design.description }}
+    </div>
+  }
 
   <!-- COST -->
-  <ng-container *ngIf="design.materials?.length > 0">
-    <ng-container *ngIf="(materials | async) as materials">
-
+  @if (design.materials?.length > 0) {
+    @if ((materials | async); as materials) {
       <div class="__recipe">
         <div class="row --source">
           Cost:
         </div>
         <div class="row --materials">
-          <ng-container *ngFor="let ref of design.materials">
-            <ng-container *ngIf="materials[ref.id] as mat">
+          @for (ref of design.materials; track ref) {
+            @if (materials[ref.id]; as mat) {
               <div class="icon-materials-container">
                 <span class="icon--materials icon--materials--{{ mat.icon }}"></span>
               </div>
@@ -35,32 +36,37 @@
               <span></span><!-- wrap line -->
               <span></span><!-- wrap line -->
               <span></span><!-- wrap line -->
-            </ng-container>
-          </ng-container>
+            }
+          }
         </div>
       </div>
-
-    </ng-container>
-  </ng-container>
+    }
+  }
 
   <!-- LOOT TABLE -->
-  <div *ngIf="design.lootTable">
-    <div class="row --loot-table">
-      <div class="icon-materials-container">
-        <span
+  @if (design.lootTable) {
+    <div>
+      <div class="row --loot-table">
+        <div class="icon-materials-container">
+          <span
           class="icon--materials icon--materials--{{ design.lootTable.replace(' ', '_').replace('\'', '') }}"></span>
+        </div>
+        @if (design.lootTable) {
+          <span>
+            Exclusive to <strong>{{ design.lootTable | titlecase }}</strong>
+          </span>
+        }
       </div>
-      <span *ngIf="design.lootTable">
-        Exclusive to <strong>{{ design.lootTable | titlecase }}</strong>
-      </span>
     </div>
-  </div>
+  }
 
   <div class="row --footer">
     <!-- REQUIRED CIV -->
-    <div class="row --civ" *ngIf="design.civilization">
-      <strong>Exclusive to the {{ design.civilization | titlecase }} civilization</strong>
-    </div>
+    @if (design.civilization) {
+      <div class="row --civ">
+        <strong>Exclusive to the {{ design.civilization | titlecase }} civilization</strong>
+      </div>
+    }
   </div>
 
 </cis-shell>

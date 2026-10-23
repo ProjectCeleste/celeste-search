@@ -1,33 +1,35 @@
-<div
-  *ngIf="isOpen"
-  class="__sidebar"
-  (window:keydown.escape)="close()"
-  exclude=".__sidebar-open"
-  @enterLeaveRight
->
-
-  <div class="__buttons">
-    <button
-      *ngFor="let text of ['Help', 'Settings']; index as i"
-      [class.--active]="tab === i"
-      (click)="tab = i"
-    >{{ text }}</button>
-
-    <cis-icon-button
-      icon="close"
-      class="__close"
-      (click)="close()"
+@if (isOpen) {
+  <div
+    class="__sidebar"
+    (window:keydown.escape)="close()"
+    exclude=".__sidebar-open"
+    @enterLeaveRight
     >
-    </cis-icon-button>
+    <div class="__buttons">
+      @for (text of ['Help', 'Settings']; track text; let i = $index) {
+        <button
+          [class.--active]="tab === i"
+          (click)="tab = i"
+        >{{ text }}</button>
+      }
+      <cis-icon-button
+        icon="close"
+        class="__close"
+        (click)="close()"
+        >
+      </cis-icon-button>
+    </div>
+    <div class="__content">
+      <cis-scrollbar theme="dark">
+        <div class="__hints">
+          @if (tab === 0) {
+            <cis-help></cis-help>
+          }
+          @if (tab === 1) {
+            <cis-settings></cis-settings>
+          }
+        </div>
+      </cis-scrollbar>
+    </div>
   </div>
-
-  <div class="__content">
-    <cis-scrollbar theme="dark">
-      <div class="__hints">
-        <cis-help *ngIf="tab === 0"></cis-help>
-        <cis-settings *ngIf="tab === 1"></cis-settings>
-      </div>
-    </cis-scrollbar>
-  </div>
-
-</div>
+}

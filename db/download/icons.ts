@@ -1,6 +1,5 @@
 import crypto from "crypto"
 import { copy, mkdirp } from "fs-extra"
-import nanoid from "nanoid"
 import { dirname } from "path"
 import chalk from "chalk"
 

@@ -2,61 +2,72 @@
   sprite="materials" [description]="material.description"  [vendors]="material.vendors">
 
   <!-- QUEST -->
-  <div *ngIf="material.quest">
-    <div class="row --source">
-      <span>Reward from:</span>
-    </div>
-
-    <div class="row --materials">
-      <div class="icon-materials-container">
-        <span class="icon--materials icon--materials--{{ material.event?.name || 'quest' }}"></span>
+  @if (material.quest) {
+    <div>
+      <div class="row --source">
+        <span>Reward from:</span>
       </div>
-      <span *ngIf="material.quest" [innerHTML]="material.quest"></span>
+      <div class="row --materials">
+        <div class="icon-materials-container">
+          <span class="icon--materials icon--materials--{{ material.event?.name || 'quest' }}"></span>
+        </div>
+        @if (material.quest) {
+          <span [innerHTML]="material.quest"></span>
+        }
+      </div>
     </div>
-  </div>
+  }
 
   <!-- EVENT -->
-  <div *ngIf="material.event">
-    <div class="row --source">
-      <span>Exclusive to:</span>
-    </div>
-
-    <div class="row --materials">
-      <div class="icon-materials-container">
-        <span class="icon--materials icon--materials--{{ material.event?.name || 'quest' }}"></span>
+  @if (material.event) {
+    <div>
+      <div class="row --source">
+        <span>Exclusive to:</span>
       </div>
-      <span *ngIf="material.event">
-        {{ material.event!.name | titlecase }} Event
-        <!-- <span *ngIf="material.event.year">{{ material.event!.year }}</span> -->
-      </span>
+      <div class="row --materials">
+        <div class="icon-materials-container">
+          <span class="icon--materials icon--materials--{{ material.event?.name || 'quest' }}"></span>
+        </div>
+        @if (material.event) {
+          <span>
+            {{ material.event!.name | titlecase }} Event
+            <!-- <span *ngIf="material.event.year">{{ material.event!.year }}</span> -->
+          </span>
+        }
+      </div>
     </div>
-  </div>
+  }
 
   <!-- LOOT TABLE -->
-  <div *ngIf="material.lootTable">
-    <div class="row --loot-table">
-      <div class="icon-materials-container">
-        <span
+  @if (material.lootTable) {
+    <div>
+      <div class="row --loot-table">
+        <div class="icon-materials-container">
+          <span
           class="icon--materials icon--materials--{{ material.lootTable.replace(' ', '_').replace('\'', '') }}"></span>
+        </div>
+        @if (material.lootTable) {
+          <span>
+            Exclusive to <strong>{{ material.lootTable | titlecase }}</strong>
+          </span>
+        }
       </div>
-      <span *ngIf="material.lootTable">
-        Exclusive to <strong>{{ material.lootTable | titlecase }}</strong>
-      </span>
     </div>
-  </div>
+  }
 
   <!-- WORKSHOP -->
-  <div *ngIf="material.workshop">
-    <div class="row --source">
-      <span>Made in:</span>
-      <span>&nbsp;<strong></strong></span>
-    </div>
-
-    <div class="row --materials">
-      <div class="icon-materials-container">
-        <span class="icon--materials icon--materials--workshop-{{ material.workshop.replace(' ', '-') }}"></span>
+  @if (material.workshop) {
+    <div>
+      <div class="row --source">
+        <span>Made in:</span>
+        <span>&nbsp;<strong></strong></span>
       </div>
-      <span>{{ material.workshop | titlecase }}'s Workshop</span>
+      <div class="row --materials">
+        <div class="icon-materials-container">
+          <span class="icon--materials icon--materials--workshop-{{ material.workshop.replace(' ', '-') }}"></span>
+        </div>
+        <span>{{ material.workshop | titlecase }}'s Workshop</span>
+      </div>
     </div>
-  </div>
+  }
 </cis-shell>

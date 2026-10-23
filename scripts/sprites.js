@@ -67,7 +67,7 @@ const sprite = (name, size) => {
     in: `generated/sprites/${name}/*.png`,
     out: "generated/sprites",
   }
-  const config = { base: "generated" }
+  const config = { base: "generated", encoding: false }
   const imageSizes = {
     width: size,
     height: size,

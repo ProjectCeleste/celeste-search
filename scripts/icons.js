@@ -1,10 +1,24 @@
 const { src, dest } = require("gulp")
 const svgmin = require("gulp-svgmin")
-const svgoConfig = require("@n4bb12/config-svgo")
 
 const paths = {
   in: "node_modules/linearicons/dist/svg/*.svg",
   out: "generated/icons",
+}
+
+const svgoConfig = {
+  plugins: [
+    {
+      name: "preset-default",
+      params: {
+        overrides: {
+          removeViewBox: false,
+          convertColors: { currentColor: true },
+        },
+      },
+    },
+    "removeDimensions",
+  ],
 }
 
 /**

@@ -3,7 +3,9 @@
   <input type="text" class="__input" placeholder="Type anything..." aria-label="Search" autocomplete="off"
     autocorrect="off" autocapitalize="off" spellcheck="false" [formControl]="inputModel" #inputRef />
 
-  <cis-icon-button icon="clear" (click)="clear()" *ngIf="!(isEmpty | async)">
-  </cis-icon-button>
+    @if (!(isEmpty | async)) {
+      <cis-icon-button icon="clear" (click)="clear()">
+      </cis-icon-button>
+    }
 
-</div>
+  </div>
